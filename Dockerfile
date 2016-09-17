@@ -91,3 +91,17 @@ RUN cd ${WS}/src \
  && git clone https://github.com/RobotLocomotion/drake.git \
  && ln -s $PWD/drake/ros $PWD/drake_ros_integration
 
+# fortran compilers
+ENV FC gfortran-4.9
+ENV F77 gfortran-4.9
+
+# c/c++ compilers
+ENV CC gcc-4.9
+ENV CXX g++-4.9
+#ENV CC clang-3.7
+#ENV CXX clang++-3.7
+
+# catkin workspace
+RUN catkin init \
+ && catkin config --cmake-args -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo \
+ && catkin build -i
