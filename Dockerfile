@@ -110,3 +110,6 @@ RUN . /opt/ros/indigo/setup.sh \
  && catkin init \
  && catkin config --cmake-args -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo \
  && catkin build --limit-status-rate 1
+
+COPY ./entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
