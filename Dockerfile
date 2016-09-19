@@ -107,6 +107,7 @@ ENV CXX g++-4.9
 #ENV CXX clang++-3.7
 
 # catkin workspace
-RUN catkin init \
+RUN . /opt/ros/indigo/setup.sh \
+ && catkin init \
  && catkin config --cmake-args -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo \
- && catkin build -i
+ && catkin build --limit-status-rate 1
