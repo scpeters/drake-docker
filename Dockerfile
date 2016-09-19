@@ -43,6 +43,7 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     python-catkin-tools \
     ros-indigo-ackermann-msgs \
+    ros-indigo-tf \
     \
     autoconf \
     automake \
@@ -90,6 +91,10 @@ RUN apt-get update \
 RUN cd ${WS}/src \
  && git clone https://github.com/RobotLocomotion/drake.git \
  && ln -s $PWD/drake/ros $PWD/drake_ros_integration
+
+# clone catkin
+RUN cd ${WS}/src \
+ && git clone https://github.com/ros/catkin.git
 
 # fortran compilers
 ENV FC gfortran-4.9
