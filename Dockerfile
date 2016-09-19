@@ -1,4 +1,4 @@
-FROM ros:indigo-ros-base
+FROM osrf/ros:indigo-desktop
 
 ENV WS /root/ws
 RUN mkdir -p ${WS}/src
@@ -43,7 +43,6 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     python-catkin-tools \
     ros-indigo-ackermann-msgs \
-    ros-indigo-tf \
     \
     autoconf \
     automake \
