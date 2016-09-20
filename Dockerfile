@@ -111,5 +111,18 @@ RUN . /opt/ros/indigo/setup.sh \
  && catkin config --cmake-args -DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo \
  && catkin build --limit-status-rate 1
 
+# roslaunch shortcuts
+RUN echo "roslaunch drake_cars_examples single_car_in_stata_garage.launch" > run_cars_example.sh
+
+# Instead of installing nvidia drivers, use nvidia-docker-plugin
+# Set environment variables to look for attached nvidia-docker volume
+# This shouldn't interfere with other GPU implementations
+# These lines were copied from cuda 7.5 Dockerfile
+# https://github.com/NVIDIA/nvidia-docker/blob/v1.0.0-rc.3/ubuntu-14.04/cuda/7.5/runtime/Dockerfile#L4
+# https://github.com/NVIDIA/nvidia-docker/blob/v1.0.0-rc.3/ubuntu-14.04/cuda/7.5/runtime/Dockerfile#L37-L38
+LABEL com.nvidia.volumes.needed="nvidia_driver"
+ENV PATH /usr/local/nvidia/bin:${PATH}
+ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64:${LD_LIBRARY_PATH}
+
 COPY ./entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
